@@ -6,29 +6,19 @@
 //  Copyright © 2016 Александр Мелащенко. All rights reserved.
 //
 
+#import "MELMyBook.h"
+#import "MELVisitor.h"
 
-#import "MyBook.h"
+@implementation MELMyBook
 
-@implementation MyBook
-
-+(instancetype)CreateBookWithName:(NSString*)name Year:(int)year Type:(BookType)type
++ (instancetype)CreateBookWithName:(NSString*)name Year:(NSInteger)year Type:(MELBookType)type
 {
-    return [[[MyBook alloc]initWithName:name Year:year Type:type] autorelease];
+    return [[[MELMyBook alloc]initWithName:name Year:year Type:type] autorelease];
 
 }
 
--(instancetype)init
-{
-    if(self = [super init])
-    {
-        _name = nil;
-        _year = 0;
-        _type = UNKNOWN;
-    }
-    return self;
-}
 
--(instancetype)initWithName:(NSString*)name Year:(int)year Type:(BookType)type;
+- (instancetype)initWithName:(NSString*)name Year:(NSInteger)year Type:(MELBookType)type;
 {
     if(self = [super init])
     {
@@ -40,15 +30,18 @@
 }
 
 
--(void)dealloc
+- (void)dealloc
 {
+    NSLog(@"%@ dealloced", [self description]);
+    
     [_name release];
+    
     [super dealloc];
 }
 
 //Setters
 
--(void)setName:(NSString*)name
+- (void)setName:(NSString*)name
 {
     if (name != _name)
     {
@@ -57,45 +50,44 @@
     }
 }
 
--(void)setYear:(int)year
+- (void)setYear:(NSInteger)year
 {
     _year = year;
 }
 
--(void)setBookType:(BookType)type
+- (void)setBookType:(MELBookType)type
 {
     _type = type;
 }
 
 //Getters
 
--(NSString*)getName
+- (NSString *)getName
 {
     return _name;
 }
 
--(int)getYear
+- (NSInteger)getYear
 {
     return _year;
 }
 
--(BookType)getBookType
+- (MELBookType)getBookType
 {
     return _type;
 }
 
-//
 
-- (NSString *)description
+- (NSString *)getBookTypeAsNSString;
 {
     NSString *type = [[NSString alloc] init];
     switch (_type)
     {
-        case PAPERBACK:
+        case kMELBookTypePaperback:
             type = @"Paperback";
             break;
             
-        case HARDCOVER:
+        case kMELBookTypeHadrcover:
             type = @"Hardcover";
             break;
             
@@ -103,7 +95,15 @@
             type = @"Unknown";
             break;
     }
-    return [NSString stringWithFormat:@"%@ %d %@", _name, _year, type];
+    return type;
+}
+
+//
+
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ %@ %lu %@", [super description], _name, _year, [self getBookTypeAsNSString]];
 }
 
 @end
