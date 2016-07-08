@@ -7,12 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MELLibrary.h"
 #import "MELVisitor.h"
-#import "MELMyBook.h"
+#import "MELBook.h"
 
 @interface MELVisitor()
+{
+@private
+    NSString *_name;
+    NSString *_lastName;
+    NSInteger _yearOfBirth;
+    
+    MELLibrary *_library;
+}
 
-@property (readwrite, assign, ) MELMyBook *currentBook;
+@property (readwrite) NSMutableArray *currentBooks;
 
 @end
 
@@ -25,12 +34,23 @@
     return [[[MELVisitor alloc] initWithName:name lastName:lastName yearOfBirth:yearOfBirth] autorelease];
 }
 
-- (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth
+- (instancetype)init
 {
     if(self = [super init])
     {
-        _name = [[NSString alloc] initWithString:name];
-        _lastName = [[NSString alloc] initWithString:lastName];
+        _currentBooks = NSMutableArray.new;
+        _library = MELLibrary.getInstance;
+        [_library addVisitor:self];
+    }
+    return self;
+}
+
+- (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth
+{
+    if(self = [self init])
+    {
+        _name = [name copy];
+        _lastName = [lastName copy];
         _yearOfBirth = yearOfBirth;
     }
     return self;
@@ -39,6 +59,8 @@
 - (void)dealloc
 {
     NSLog(@"%@ dealloced", [self description]);
+    
+    [_library removeVisitor:self];
     
     [self.name release];
     [self.lastName release];
@@ -53,7 +75,7 @@
     if(name != _name)
     {
         [_name release];
-        _name = [[NSString alloc] initWithString:name];
+        _name = [name copy];
     }
 }
 
@@ -62,7 +84,7 @@
     if(lastName != _lastName)
     {
         [_lastName release];
-        _lastName = [[NSString alloc] initWithString:lastName];
+        _lastName = [lastName copy];
     }
 }
 
@@ -96,25 +118,23 @@
 
 //"Book" methods
 
-- (BOOL)takeBook:(MELMyBook *)aBook
+- (BOOL)takeBook:(MELBook *)aBook
 {
-    if(!self.currentBook && !aBook.owner)
+    if(!aBook.owner)
     {
-        [aBook retain];
-        self.currentBook = aBook;
+        [self.currentBooks addObject:aBook];
         aBook.owner = self;
         return YES;
     }
     return NO;
 }
 
-- (BOOL)returnCurrentBook;
+- (BOOL)returnBook:(MELBook *)aBook
 {
-    if(self.currentBook)
+    if([self.currentBooks containsObject:aBook])
     {
-        self.currentBook.owner = nil;
-        [self.currentBook release];
-        self.currentBook = nil;
+        aBook.owner = nil;
+        [self.currentBooks removeObject:aBook];
         
         return YES;
     }

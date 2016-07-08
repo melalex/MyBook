@@ -6,25 +6,58 @@
 //  Copyright © 2016 Александр Мелащенко. All rights reserved.
 //
 
-#import "MELMyBook.h"
+#import "MELBook.h"
 #import "MELVisitor.h"
+#import "MELLibrary.h"
 
-@implementation MELMyBook
-
-+ (instancetype)CreateBookWithName:(NSString*)name Year:(NSInteger)year Type:(MELBookType)type
+@interface MELBook()
 {
-    return [[[MELMyBook alloc]initWithName:name Year:year Type:type] autorelease];
-
+@private
+    NSString *_name;
+    NSInteger _year;
+    MELBookType _type;
+    
+    MELLibrary *_library;
 }
 
 
-- (instancetype)initWithName:(NSString*)name Year:(NSInteger)year Type:(MELBookType)type;
+@end
+
+@implementation MELBook
+
++ (instancetype)CreateBookWithName:(NSString*)name Year:(NSInteger)year Type:(MELBookType)type
 {
-    if(self = [super init])
+    return [[[MELBook alloc]initWithName:name aYear:year aType:type] autorelease];
+
+}
+
+- (instancetype)init
+{
+    if (self = [super init])
     {
-        _name = [[NSString alloc] initWithString:name];
+        _library = MELLibrary.getInstance;
+        [_library addBook:self];
+    }
+    return self;
+}
+
+- (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type
+{
+    return [self initWithName:name aYear:year aType:type aIdentifier:[[NSUUID alloc] init].UUIDString];
+}
+
+- (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier;
+{
+    if(self = [self init])
+    {
+        _name = [name copy];
         _year = year;
         _type = type;
+        
+        if([_library containsIdentifier:identifier])
+            @throw @"Identifier is already exist";
+        else
+            _identifier = identifier;
     }
     return self;
 }
@@ -33,6 +66,8 @@
 - (void)dealloc
 {
     NSLog(@"%@ dealloced", [self description]);
+    
+    [_library removeBook:self];
     
     [_name release];
     
@@ -46,7 +81,7 @@
     if (name != _name)
     {
         [_name release];
-        _name = [[NSString alloc] initWithString:name];
+        _name = [name copy];
     }
 }
 

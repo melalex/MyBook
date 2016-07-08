@@ -8,41 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class MELMyBook;
+@class MELBook;
 
 @interface MELVisitor : NSObject
-{
-@private
-    NSString *_name;
-    NSString *_lastName;
-    NSInteger _yearOfBirth;
-}
 
 @property (copy) NSString *name;
 @property (copy) NSString *lastName;
 @property NSInteger yearOfBirth;
-@property (readonly, nonatomic) NSString *fullName;
-@property (readonly, assign) MELMyBook *currentBook;
+@property (readonly) NSString *fullName;
+@property (readonly) NSMutableArray *currentBooks;
 
 + (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth;
 
-
 - (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth;
 
-
-- (void)setName:(NSString *)name;
-- (void)setLastName:(NSString *)lastName;
-- (void)setYearOfBirth:(NSInteger)yearOfBirth;
-
-
-- (NSString *)name;
-- (NSString *)lastName;
-- (NSInteger)yearOfBirth;
-
-- (NSString *)fullName;
-
-
-- (BOOL)takeBook:(MELMyBook *)aBook;
-- (BOOL)returnCurrentBook;
+- (BOOL)takeBook:(MELBook *)aBook;
+- (BOOL)returnBook:(MELBook *)aBook;
 
 @end

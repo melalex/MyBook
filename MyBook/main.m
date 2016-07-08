@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MELMyBook.h"
+#import "MELBook.h"
 #import "MELVisitor.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        MELMyBook *book1 = [[MELMyBook alloc] init];
-        MELMyBook *book2 = [[MELMyBook alloc] initWithName:@"The Alchemist" Year:1988 Type:kMELBookTypePaperback];
-        MELMyBook *book3 = [MELMyBook CreateBookWithName:@"Dark tower" Year:1982 Type:kMELBookTypeHadrcover];
+        MELBook *book1 = [[MELBook alloc] init];
+        MELBook *book2 = [[MELBook alloc] initWithName:@"The Alchemist" aYear:1988 aType:kMELBookTypePaperback];
+        MELBook *book3 = [MELBook CreateBookWithName:@"Dark tower" Year:1982 Type:kMELBookTypeHadrcover];
         
         [book1 setName:@"1984"];
         [book1 setYear:1949];
@@ -86,5 +86,8 @@ int main(int argc, const char * argv[]) {
         [visitor1 release];
         [visitor2 release];
     }
+    
+    NSLog(@"Main ended");
+    
     return 0;
 }
