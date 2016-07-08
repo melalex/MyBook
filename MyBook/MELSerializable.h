@@ -10,7 +10,12 @@
 
 @protocol MELSerializable <NSObject>
 
-- (instancetype)initWithFilePath:(NSString *)aPath;
-- (void)writeToFilePath:(NSString *)aPath;
+@required
+    - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;
+    - (NSDictionary *)dictionaryRepresentation;
+
+@optional
+    - (instancetype)initWithFilePath:(NSString *)aPath;
+    - (void)writeToFilePath:(NSString *)aPath;
 
 @end

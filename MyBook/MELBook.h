@@ -22,9 +22,7 @@ typedef NS_ENUM (NSInteger, MELBookType)
 @interface MELBook : NSObject
 
 @property (readwrite, assign) MELVisitor *owner;
-@property (readonly) NSString *identifier;
-
-@property (readwrite, assign) MELLibrary *library;
+@property (readonly, copy) NSString *identifier;
 
 + (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type;
 + (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier;

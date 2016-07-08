@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class MELBook;
+@class MELLibrary;
 
 @interface MELVisitor : NSObject
 
@@ -17,8 +18,8 @@
 @property NSInteger yearOfBirth;
 @property (readonly) NSString *fullName;
 @property (readonly) NSMutableArray *currentBooks;
-
-@property (assign) MELLibrary *library;
+ 
+@property (readonly, copy) NSString *identifier;
 
 + (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth;
 + (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth library:(MELLibrary *)library;

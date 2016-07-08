@@ -9,6 +9,7 @@
 #import "MELLibrary.h"
 #import "MELVisitor.h"
 #import "MELBook.h"
+#import "NSArray+MELEquality.h"
 
 @interface MELLibrary()
 {
@@ -30,6 +31,20 @@
     return self;
 }
 
+- (BOOL)isEqual:(MELLibrary *)other
+{
+    BOOL result = NO;
+    
+    if([self.books isSame:other.books] && [self.visitors isSame:other.visitors])
+        result = YES;
+    
+    return result;
+}
+
+- (NSUInteger)hash
+{
+    return self.visitors.hash + self.books.hash;
+}
 
 - (BOOL)containsIdentifier:(NSString *)identifier
 {
@@ -47,6 +62,22 @@
     return result;
 }
 
+- (BOOL)containsIdentityVisitor:(MELVisitor*)newVisitor
+{
+    BOOL result = YES;
+    
+    for(MELVisitor *visitor in self.visitors)
+    {
+        if(visitor == newVisitor)
+        {
+            result = NO;
+            break;
+        }
+    }
+    return result;
+}
+
+
 
 - (NSArray *)visitors
 {
@@ -61,6 +92,11 @@
 
 - (void)addBook:(MELBook*)book
 {
+    if([self containsIdentifier:book.identifier])
+        @throw @"Identifier is already exist";
+    
+    
+    
     [self.books addObject:book];
 }
 
@@ -71,7 +107,10 @@
 
 - (void)addVisitor:(MELVisitor *)visitor
 {
-    [self.visitors addObject:visitor];
+    if(![self containsIdentityVisitor:visitor])
+    {
+        [self.visitors addObject:visitor];
+    }
 }
 
 - (void)removeVisitor:(MELVisitor *)visitor

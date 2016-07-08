@@ -10,6 +10,7 @@
 #import "MELLibrary.h"
 #import "MELVisitor.h"
 #import "MELBook.h"
+#import "NSArray+MELEquality.h"
 
 @interface MELVisitor()
 {
@@ -17,8 +18,6 @@
     NSString *_name;
     NSString *_lastName;
     NSInteger _yearOfBirth;
-    
-    MELLibrary *_library;
 }
 
 @property (readwrite) NSMutableArray *currentBooks;
@@ -60,8 +59,7 @@
         _name = [name copy];
         _lastName = [lastName copy];
         _yearOfBirth = yearOfBirth;
-        _library = library;
-        [_library addVisitor:self];
+        [library addVisitor:self];
     }
     return self;
 
@@ -72,12 +70,31 @@
 {
     NSLog(@"%@ dealloced", [self description]);
     
-    [_library removeVisitor:self];
-    
     [self.name release];
     [self.lastName release];
     
     [super dealloc];
+}
+
+
+- (BOOL)isEqual:(MELVisitor *)other
+{
+    BOOL result = NO;
+    
+    if([self.name isEqual:other.name]
+       && [self.lastName isEqual:other.lastName]
+       && [self.currentBooks isSame:other.currentBooks]
+       && self.yearOfBirth == other.yearOfBirth)
+    {
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (NSUInteger)hash
+{
+    return self.name.hash + self.lastName.hash + self.yearOfBirth + self.currentBooks.count;
 }
 
 //Setters
@@ -105,13 +122,6 @@
     _yearOfBirth = yearOfBirth;
 }
 
-- (void)setLibrary:(MELLibrary *)library
-{
-    [_library removeVisitor:self];
-    _library = library;
-    [_library addVisitor:self];
-}
-
 //Getters
 
 - (NSString *)name
@@ -132,11 +142,6 @@
 - (NSString *)fullName
 {
     return [NSString stringWithFormat:@"%@ %@", self.name, self.lastName];
-}
-
-- (MELLibrary *)library
-{
-    return _library;
 }
 
 //"Book" methods

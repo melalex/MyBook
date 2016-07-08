@@ -21,7 +21,7 @@
 - (void)addBook:(MELBook*)book;
 - (void)removeBook:(MELBook*)book;
 
-- (void)addVisitor:(MELVisitor *)visitor;
-- (void)removeVisitor:(MELVisitor *)visitor;
+- (void)addVisitor:(MELVisitor*)visitor;
+- (void)removeVisitor:(MELVisitor*)visitor;
 
 @end

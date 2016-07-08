@@ -17,7 +17,7 @@
     NSInteger _year;
     MELBookType _type;
     
-    MELLibrary *_library;
+    NSString *_identifier;
 }
 
 
@@ -70,12 +70,9 @@
         _year = year;
         _type = type;
         
-        _library = library;
+        _identifier = [identifier copy];
         
-        if([_library containsIdentifier:identifier])
-            @throw @"Identifier is already exist";
-        else
-            _identifier = identifier;
+        [library addBook:self];;
     }
     return self;
 }
@@ -84,11 +81,29 @@
 {
     NSLog(@"%@ dealloced", [self description]);
     
-    [_library removeBook:self];
-    
     [_name release];
     
     [super dealloc];
+}
+
+- (BOOL)isEqual:(MELBook *)other
+{
+    BOOL result = NO;
+    
+    if([_name isEqual:other.getName]
+       && [self.owner isEqual:other.owner]
+       && _year == other.getYear
+       && _type == other.getBookType)
+    {
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (NSUInteger)hash
+{
+    return _name.hash + _year + _type + _owner.hash;
 }
 
 //Setters
@@ -110,13 +125,7 @@
 - (void)setBookType:(MELBookType)type
 {
     _type = type;
-}
-
-- (void)setLibrary:(MELLibrary *)library
-{
-    _library = library;
-    [_library addBook:self];
-}
+} 
 
 //Getters
 
@@ -133,11 +142,11 @@
 - (MELBookType)getBookType
 {
     return _type;
-}
+} 
 
-- (MELLibrary *)library
+- (NSString *)identifier
 {
-    return _library;
+    return _identifier;
 }
 
 - (NSString *)getBookTypeAsNSString;
