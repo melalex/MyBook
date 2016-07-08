@@ -6,14 +6,29 @@
 //  Copyright © 2016 Александр Мелащенко. All rights reserved.
 //
 
-#import "MELLibrary.h"
 #import "MELSerializable.h"
+#import "MELLibrary.h"
 
 @interface MELLibrary (MELSerialization) <MELSerializable>
 
 @end
 
-@implementation MELLibrary
+@implementation MELLibrary (MELSerialization)
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+    if(self = [self init])
+    {
+        
+    }
+    return self;
+}
+
+- (NSDictionary *)dictionaryRepresentation;
+{
+    NSMutableDictionary *result = NSMutableDictionary.new;
+    return result;
+}
 
 - (instancetype)initWithFilePath:(NSString *)aPath;
 {

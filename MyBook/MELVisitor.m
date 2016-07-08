@@ -31,7 +31,12 @@
 
 + (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth
 {
-    return [[[MELVisitor alloc] initWithName:name lastName:lastName yearOfBirth:yearOfBirth] autorelease];
+    return [MELVisitor createMELVisitorWithName:name lastName:lastName yearOfBirth:yearOfBirth library:nil];
+}
+
++ (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth library:(MELLibrary *)library
+{
+    return [[MELVisitor alloc] initWithName:name lastName:lastName yearOfBirth:yearOfBirth library:library];
 }
 
 - (instancetype)init
@@ -39,22 +44,29 @@
     if(self = [super init])
     {
         _currentBooks = NSMutableArray.new;
-        _library = MELLibrary.getInstance;
-        [_library addVisitor:self];
     }
     return self;
 }
 
 - (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth
 {
+    return [self initWithName:name lastName:lastName yearOfBirth:yearOfBirth library:nil];
+}
+
+- (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth library:(MELLibrary *)library
+{
     if(self = [self init])
     {
         _name = [name copy];
         _lastName = [lastName copy];
         _yearOfBirth = yearOfBirth;
+        _library = library;
+        [_library addVisitor:self];
     }
     return self;
+
 }
+
 
 - (void)dealloc
 {
@@ -93,6 +105,12 @@
     _yearOfBirth = yearOfBirth;
 }
 
+- (void)setLibrary:(MELLibrary *)library
+{
+    [_library removeVisitor:self];
+    _library = library;
+    [_library addVisitor:self];
+}
 
 //Getters
 
@@ -114,6 +132,11 @@
 - (NSString *)fullName
 {
     return [NSString stringWithFormat:@"%@ %@", self.name, self.lastName];
+}
+
+- (MELLibrary *)library
+{
+    return _library;
 }
 
 //"Book" methods

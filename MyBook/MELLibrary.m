@@ -20,40 +20,6 @@
 
 @implementation MELLibrary
 
-@synthesize visitors = _vizitors;
-@synthesize books = _books;
-
-static MELLibrary * _instance = nil;
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [[self getInstance] retain];
-}
-
-- (id)copyWithZone:(NSZone*)zone
-{
-    return self;
-}
-
-- (id)retain
-{
-    return self;
-}
-- (NSUInteger)retainCount
-{
-    return NSUIntegerMax;
-}
-
-- (oneway void) release
-{
-    
-}
-
-- (id)autorelease
-{
-    return self;
-}
-
 - (instancetype)init
 {
     if (self = [super init])
@@ -62,15 +28,6 @@ static MELLibrary * _instance = nil;
         _books = NSMutableArray.new;
     }
     return self;
-}
-
-+(MELLibrary *)getInstance
-{
-    if(_instance)
-    {
-        _instance = [[super allocWithZone:nil] init];
-    }
-    return _instance;
 }
 
 
@@ -88,6 +45,17 @@ static MELLibrary * _instance = nil;
     }
     
     return result;
+}
+
+
+- (NSArray *)visitors
+{
+    return _visitors;
+}
+
+- (NSArray *)books
+{
+    return _books;
 }
 
 

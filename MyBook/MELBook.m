@@ -25,21 +25,27 @@
 
 @implementation MELBook
 
-+ (instancetype)CreateBookWithName:(NSString*)name Year:(NSInteger)year Type:(MELBookType)type
++ (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type
 {
     return [[[MELBook alloc]initWithName:name aYear:year aType:type] autorelease];
 
 }
 
-- (instancetype)init
++ (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier
 {
-    if (self = [super init])
-    {
-        _library = MELLibrary.getInstance;
-        [_library addBook:self];
-    }
-    return self;
+    return [[MELBook alloc] initWithName:name aYear:year aType:type aIdentifier:identifier];
 }
+
++ (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aLibrary:(MELLibrary *)library
+{
+    return [[MELBook alloc] initWithName:name aYear:year aType:type aLibrary:library];
+}
+
++ (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier aLibrary:(MELLibrary *)library
+{
+    return [[MELBook alloc] initWithName:name aYear:year aType:type aIdentifier:identifier aLibrary:library];
+}
+
 
 - (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type
 {
@@ -48,11 +54,23 @@
 
 - (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier;
 {
+    return [self initWithName:name aYear:year aType:type aIdentifier:identifier aLibrary:nil];
+}
+
+- (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aLibrary:(MELLibrary *)library
+{
+    return [self initWithName:name aYear:year aType:type aIdentifier:[[NSUUID alloc] init].UUIDString aLibrary:library];
+}
+
+- (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier aLibrary:(MELLibrary *)library
+{
     if(self = [self init])
     {
         _name = [name copy];
         _year = year;
         _type = type;
+        
+        _library = library;
         
         if([_library containsIdentifier:identifier])
             @throw @"Identifier is already exist";
@@ -61,7 +79,6 @@
     }
     return self;
 }
-
 
 - (void)dealloc
 {
@@ -95,6 +112,12 @@
     _type = type;
 }
 
+- (void)setLibrary:(MELLibrary *)library
+{
+    _library = library;
+    [_library addBook:self];
+}
+
 //Getters
 
 - (NSString *)getName
@@ -112,6 +135,10 @@
     return _type;
 }
 
+- (MELLibrary *)library
+{
+    return _library;
+}
 
 - (NSString *)getBookTypeAsNSString;
 {

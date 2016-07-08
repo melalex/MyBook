@@ -16,8 +16,6 @@
 @property (readonly) NSArray *visitors;
 @property (readonly) NSArray *books;
 
-+ (MELLibrary *)getInstance;
-
 - (BOOL)containsIdentifier:(NSString *)identifier;
 
 - (void)addBook:(MELBook*)book;

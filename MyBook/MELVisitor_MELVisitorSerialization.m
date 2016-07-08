@@ -12,3 +12,18 @@
 @interface MELVisitor (MELSerialization) <MELSerializable>
 
 @end
+
+@implementation MELVisitor (MELSerialization)
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+    return self;
+}
+
+- (NSDictionary *)dictionaryRepresentation;
+{
+    NSMutableDictionary *result = NSMutableDictionary.new;
+    return result;
+}
+
+@end
