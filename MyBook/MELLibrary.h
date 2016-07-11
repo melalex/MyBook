@@ -24,4 +24,7 @@
 - (void)addVisitor:(MELVisitor*)visitor;
 - (void)removeVisitor:(MELVisitor*)visitor;
 
+- (NSArray *)findBook:(NSString *)name;
+- (NSArray *)findVisitor:(NSString *)name;
+
 @end

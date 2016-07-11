@@ -72,8 +72,13 @@ int main(int argc, const char * argv[]) {
         
         [library1 writeToFilePath:@"/Users/melalex/Desktop/Projects/MyBook Exercise 4/library1.json"];
         
-        MELLibrary *library2 = [[MELLibrary alloc] initWithFilePath:@"/Users/melalex/Desktop/Projects/MyBook Exercise 4/library1.json"];
-        [library2 description];
+        NSDictionary *serializedBookLibrary1 = [library1 dictionaryRepresentation];
+        
+//        MELLibrary *library2 = [[MELLibrary alloc] initWithFilePath:@"/Users/melalex/Desktop/Projects/MyBook Exercise 4/library1.json"];
+        
+        MELLibrary *library2 = [[MELLibrary alloc] initWithDictionaryRepresentation:serializedBookLibrary1];
+        
+        NSLog(@"%lu book(s) found", (unsigned long)[library2 findBook:@"Al"].count);
         
         if([visitor1 returnBook:book1])
             NSLog(@"%@ return", visitor1);

@@ -121,6 +121,35 @@
     [visitor removeLibrary:self];
 }
 
+//Search
+
+- (NSMutableArray *)findBook:(NSString *)name
+{
+    NSMutableArray *result = NSMutableArray.new;
+    for(MELBook *book in self.books)
+    {
+        if([book.name rangeOfString:name options:(NSCaseInsensitiveSearch)].length != 0)
+        {
+            [result addObject:book];
+        }
+    }
+    return result;
+}
+
+- (NSMutableArray *)findVisitor:(NSString *)name
+{
+    NSMutableArray *result = NSMutableArray.new;
+    for(MELVisitor *visitor in self.visitors)
+    {
+        if([visitor.fullName rangeOfString:name options:(NSCaseInsensitiveSearch)].length != 0)
+        {
+            [result addObject:visitor];
+        }
+        return result;
+    }
+    return result;
+}
+
 
 @end
 

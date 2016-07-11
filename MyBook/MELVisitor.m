@@ -139,7 +139,7 @@
 
 - (BOOL)takeBook:(MELBook *)aBook
 {
-    if(!aBook.owner && ([self.libraries containsObject:aBook.library] || aBook == nil))
+    if(!aBook.owner && ([self.libraries containsObject:aBook.library] || aBook.library == nil))
     {
         [self.currentBooks addObject:aBook];
         aBook.owner = self;

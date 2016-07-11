@@ -23,9 +23,7 @@
             {
                 newBook = [MELBook CreateBookWithName:book[@"name"] aYear:[book[@"year"] longLongValue] aType:[book[@"type"] longLongValue] aIdentifier:book[@"identifier"]];
                 
-                
-                newBook.owner = self;
-                
+    
                 [self takeBook:newBook];
             };
         }

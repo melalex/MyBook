@@ -74,6 +74,7 @@
         
         NSData *data = [stringFromFileAtPath dataUsingEncoding:NSUTF8StringEncoding];
         
+        //Почему не работает???
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         
         return [self initWithDictionaryRepresentation:dictionary];
