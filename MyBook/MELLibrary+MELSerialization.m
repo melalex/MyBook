@@ -7,47 +7,100 @@
 //
 
 #import "MELLibrary+MELSerialization.h"
-#import "MELBook.h"
-#import "MELVisitor.h"
+#import "MELBook+MELSerialization.h"
+#import "MELVisitor+MELSerialization.h"
 
 @implementation MELLibrary (MELSerialization)
 
-- (instancetype)initWithDictionaryRepresentation:(NSDictionary<NSString *, id> *)aDictionary
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
     if(self = [self init])
     {
-        for(NSString *key in aDictionary)
+        @autoreleasepool
         {
-            if([aDictionary[key] isKindOfClass:[MELBook class]])
-                [self addBook:aDictionary[key]];
-            else
-                [self addVisitor:aDictionary[key]];
+            MELVisitor *newVisitor;
+            for(NSDictionary *visitor in aDictionary[@"visitors"])
+            {
+                newVisitor =[[[MELVisitor alloc] initWithDictionaryRepresentation:visitor] autorelease];
+                
+                for(MELBook *book in newVisitor.currentBooks)
+                {
+                    [self addBook:book];
+                }
+                
+                [self addVisitor:newVisitor];
+            }
+            
+            for(NSDictionary *books in aDictionary[@"books"])
+            {
+                [self addBook:[[[MELBook alloc] initWithDictionaryRepresentation:books] autorelease]];
+            }
         }
     }
     return self;
 }
 
-- (NSDictionary<NSString*, id> *)dictionaryRepresentation;
+- (NSDictionary *)dictionaryRepresentation;
 {
-    NSMutableDictionary<NSString*, id> *result = NSMutableDictionary.new;
-    
+    NSMutableArray *visitors = [NSMutableArray array];
+    for(MELVisitor *visitor in self.visitors)
+    {
+        [visitors addObject:[visitor dictionaryRepresentation]];
+    }
+        
+        
+    NSMutableArray *books = [NSMutableArray array];
     for(MELBook *book in self.books)
-        [result setObject:book forKey:book.identifier];
+    {
+        if(!book.owner)
+            [books addObject:[book dictionaryRepresentation]];
+    }
     
-    //for(MELVisitor *visitor in self.visitors)
-        
-        
-    return result;
+    return @{@"visitors" : visitors, @"books" : books};
 }
 
 - (instancetype)initWithFilePath:(NSString *)aPath;
 {
-    return self;
+    @autoreleasepool
+    {
+        NSError *error;
+        NSString *stringFromFileAtPath = [[NSString alloc] initWithContentsOfFile:aPath encoding:NSUTF8StringEncoding error:&error];
+        
+        if(!stringFromFileAtPath)
+        {
+            NSLog(@"initWithFilePath: error: %@", error.localizedDescription);
+            stringFromFileAtPath = @"{}";
+        }
+        
+        NSData *data = [stringFromFileAtPath dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+        return [self initWithDictionaryRepresentation:dictionary];
+    }
 }
 
 - (void)writeToFilePath:(NSString *)aPath;
 {
+    NSError *error = NSError.new;
+    NSString *jsonString;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self dictionaryRepresentation]
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
     
+    if (!jsonData) {
+        NSLog(@"writeToFilePath: error: %@", error.localizedDescription);
+        jsonString = @"{}";
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    BOOL ok = [jsonString writeToFile:aPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+
+    if (!ok)
+    {
+        NSLog(@"Error writing file at %@\n%@", aPath, [error localizedFailureReason]);
+    }
 }
 
 @end

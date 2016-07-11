@@ -7,28 +7,21 @@
 //
 
 #import "MELBook+MELSerialization.h"
+#import "MELVisitor+MELSerialization.h"
 
 @implementation MELBook (MELSerialization)
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-    return self;
+    return [[MELBook alloc] initWithName:aDictionary[@"name"] aYear:[aDictionary[@"year"] longLongValue] aType:[aDictionary[@"type"] longLongValue] aIdentifier:aDictionary[@"identifier"]];
 }
 
 - (NSDictionary *)dictionaryRepresentation;
 {
-    NSMutableDictionary *result = NSMutableDictionary.new;
-    @autoreleasepool
-    {
-        [result setObject:self.getName forKey:@"name"];
-        [result setObject:[NSNumber numberWithLong:self.getYear] forKey:@"year"];
-        [result setObject:[NSNumber numberWithInt:self.getBookType] forKey:@"type"];
-        [result setObject:self.identifier forKey:@"identifier"];
-        
-        // TODO
-        //[result addEntriesFromDictionary:[self.owner dictionaryRepresentation]];
-    }
-    return result;
+    return @{@"name" : self.name,
+            @"year" : [NSNumber numberWithLong:self.year],
+            @"type" : [NSNumber numberWithInt:self.type],
+            @"identifier" : self.identifier};
 }
 
 @end

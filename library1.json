@@ -1,0 +1,46 @@
+{
+  "books" : [
+
+  ],
+  "visitors" : [
+    {
+      "lastName" : "Belui",
+      "yearOfBirth" : 2007,
+      "name" : "Sanya",
+      "currentBooks" : [
+        {
+          "identifier" : "324154DD-821E-428F-854E-D9B74EA679A8",
+          "name" : "1984",
+          "year" : 1949,
+          "type" : 1
+        }
+      ]
+    },
+    {
+      "lastName" : "Pupkin",
+      "yearOfBirth" : 1939,
+      "name" : "Vasya",
+      "currentBooks" : [
+        {
+          "identifier" : "0157055C-4921-4690-A2BC-14A179B2D9AF",
+          "name" : "The Alchemist",
+          "year" : 1988,
+          "type" : 1
+        }
+      ]
+    },
+    {
+      "lastName" : "Ivanov",
+      "yearOfBirth" : 1945,
+      "name" : "Ivan",
+      "currentBooks" : [
+        {
+          "identifier" : "0DBC403C-E606-4B31-9EB2-EBA4B6BA30A0",
+          "name" : "Dark tower",
+          "year" : 1982,
+          "type" : 2
+        }
+      ]
+    }
+  ]
+}

@@ -23,6 +23,7 @@ typedef NS_ENUM (NSInteger, MELBookType)
 
 @property (readwrite, assign) MELVisitor *owner;
 @property (readonly, copy) NSString *identifier;
+@property (readwrite, assign) MELLibrary *library;
 
 + (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type;
 + (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier;
@@ -39,9 +40,9 @@ typedef NS_ENUM (NSInteger, MELBookType)
 - (void)setBookType:(MELBookType)type;
 
 
-- (NSString*)getName;
-- (NSInteger)getYear;
-- (MELBookType)getBookType;
+- (NSString*)name;
+- (NSInteger)year;
+- (MELBookType)type;
 - (NSString *)getBookTypeAsNSString;
 
 

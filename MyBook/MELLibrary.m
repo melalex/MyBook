@@ -64,13 +64,13 @@
 
 - (BOOL)containsIdentityVisitor:(MELVisitor*)newVisitor
 {
-    BOOL result = YES;
+    BOOL result = NO;
     
     for(MELVisitor *visitor in self.visitors)
     {
         if(visitor == newVisitor)
         {
-            result = NO;
+            result = YES;
             break;
         }
     }
@@ -92,16 +92,17 @@
 
 - (void)addBook:(MELBook*)book
 {
-    if([self containsIdentifier:book.identifier])
-        @throw @"Identifier is already exist";
-    
-    
-    
-    [self.books addObject:book];
+    if(![self containsIdentifier:book.identifier])
+    {
+        [book.library removeBook:book];
+        book.library = self;
+        [self.books addObject:book];
+    }
 }
 
 - (void)removeBook:(MELBook*)book
 {
+    book.library = nil;
     [self.books removeObject:book];
 }
 
@@ -110,12 +111,14 @@
     if(![self containsIdentityVisitor:visitor])
     {
         [self.visitors addObject:visitor];
+        [visitor addLibrary:self];
     }
 }
 
 - (void)removeVisitor:(MELVisitor *)visitor
 {
     [self.visitors removeObject:visitor];
+    [visitor removeLibrary:self];
 }
 
 

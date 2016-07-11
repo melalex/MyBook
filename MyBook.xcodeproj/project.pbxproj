@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD0119F41D2EF13B000B54A7 /* MELLibrary_MELLibrarySerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0119F21D2EF13B000B54A7 /* MELLibrary_MELLibrarySerialization.m */; };
-		DD0119F51D2EF13B000B54A7 /* MELVisitor_MELVisitorSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0119F31D2EF13B000B54A7 /* MELVisitor_MELVisitorSerialization.m */; };
-		DD0119F71D2EF149000B54A7 /* MELBook_MELBookSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0119F61D2EF149000B54A7 /* MELBook_MELBookSerialization.m */; };
 		DD6DD7971D2D2A3A00FF802A /* MELVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6DD7961D2D2A3A00FF802A /* MELVisitor.m */; };
+		DD7C43631D2FDC71008BD2AF /* NSArray+MELEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7C43621D2FDC71008BD2AF /* NSArray+MELEquality.m */; };
+		DD7C436C1D2FF7CA008BD2AF /* MELLibrary+MELSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7C436B1D2FF7CA008BD2AF /* MELLibrary+MELSerialization.m */; };
+		DD7C43721D301E21008BD2AF /* MELBook+MELSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7C436E1D301E21008BD2AF /* MELBook+MELSerialization.m */; };
+		DD7C43731D301E21008BD2AF /* MELVisitor+MELSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7C43711D301E21008BD2AF /* MELVisitor+MELSerialization.m */; };
 		DD90CB3A1D2ED40C0058693D /* MELLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = DD90CB391D2ED40C0058693D /* MELLibrary.m */; };
 		DDAAA3021D2BEAEA000C2C6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAAA3011D2BEAEA000C2C6D /* main.m */; };
 		DDAAA30C1D2BED83000C2C6D /* MELBook.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAAA30B1D2BED83000C2C6D /* MELBook.m */; };
@@ -29,12 +30,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DD0119F11D2EEFBC000B54A7 /* MELSerializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MELSerializable.h; path = ../MELSerializable.h; sourceTree = "<group>"; };
-		DD0119F21D2EF13B000B54A7 /* MELLibrary_MELLibrarySerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELLibrary_MELLibrarySerialization.m; sourceTree = "<group>"; };
-		DD0119F31D2EF13B000B54A7 /* MELVisitor_MELVisitorSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELVisitor_MELVisitorSerialization.m; sourceTree = "<group>"; };
-		DD0119F61D2EF149000B54A7 /* MELBook_MELBookSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELBook_MELBookSerialization.m; sourceTree = "<group>"; };
 		DD6DD7951D2D2A1A00FF802A /* MELVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MELVisitor.h; sourceTree = "<group>"; };
 		DD6DD7961D2D2A3A00FF802A /* MELVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELVisitor.m; sourceTree = "<group>"; };
+		DD7C43611D2FDC71008BD2AF /* NSArray+MELEquality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MELEquality.h"; sourceTree = "<group>"; };
+		DD7C43621D2FDC71008BD2AF /* NSArray+MELEquality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MELEquality.m"; sourceTree = "<group>"; };
+		DD7C436A1D2FF7CA008BD2AF /* MELLibrary+MELSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MELLibrary+MELSerialization.h"; sourceTree = "<group>"; };
+		DD7C436B1D2FF7CA008BD2AF /* MELLibrary+MELSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MELLibrary+MELSerialization.m"; sourceTree = "<group>"; };
+		DD7C436D1D301E21008BD2AF /* MELBook+MELSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MELBook+MELSerialization.h"; sourceTree = "<group>"; };
+		DD7C436E1D301E21008BD2AF /* MELBook+MELSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MELBook+MELSerialization.m"; sourceTree = "<group>"; };
+		DD7C436F1D301E21008BD2AF /* MELSerializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELSerializable.h; sourceTree = "<group>"; };
+		DD7C43701D301E21008BD2AF /* MELVisitor+MELSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MELVisitor+MELSerialization.h"; sourceTree = "<group>"; };
+		DD7C43711D301E21008BD2AF /* MELVisitor+MELSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MELVisitor+MELSerialization.m"; sourceTree = "<group>"; };
 		DD90CB381D2ED40C0058693D /* MELLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELLibrary.h; sourceTree = "<group>"; };
 		DD90CB391D2ED40C0058693D /* MELLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELLibrary.m; sourceTree = "<group>"; };
 		DDAAA2FE1D2BEAEA000C2C6D /* MyBook */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MyBook; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,10 +86,15 @@
 				DDAAA3081D2BECC8000C2C6D /* MELBook.h */,
 				DD90CB381D2ED40C0058693D /* MELLibrary.h */,
 				DD90CB391D2ED40C0058693D /* MELLibrary.m */,
-				DD0119F11D2EEFBC000B54A7 /* MELSerializable.h */,
-				DD0119F21D2EF13B000B54A7 /* MELLibrary_MELLibrarySerialization.m */,
-				DD0119F31D2EF13B000B54A7 /* MELVisitor_MELVisitorSerialization.m */,
-				DD0119F61D2EF149000B54A7 /* MELBook_MELBookSerialization.m */,
+				DD7C43611D2FDC71008BD2AF /* NSArray+MELEquality.h */,
+				DD7C43621D2FDC71008BD2AF /* NSArray+MELEquality.m */,
+				DD7C436F1D301E21008BD2AF /* MELSerializable.h */,
+				DD7C436D1D301E21008BD2AF /* MELBook+MELSerialization.h */,
+				DD7C436E1D301E21008BD2AF /* MELBook+MELSerialization.m */,
+				DD7C43701D301E21008BD2AF /* MELVisitor+MELSerialization.h */,
+				DD7C43711D301E21008BD2AF /* MELVisitor+MELSerialization.m */,
+				DD7C436A1D2FF7CA008BD2AF /* MELLibrary+MELSerialization.h */,
+				DD7C436B1D2FF7CA008BD2AF /* MELLibrary+MELSerialization.m */,
 			);
 			path = MyBook;
 			sourceTree = "<group>";
@@ -145,13 +156,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD0119F41D2EF13B000B54A7 /* MELLibrary_MELLibrarySerialization.m in Sources */,
 				DD6DD7971D2D2A3A00FF802A /* MELVisitor.m in Sources */,
-				DD0119F71D2EF149000B54A7 /* MELBook_MELBookSerialization.m in Sources */,
-				DD0119F51D2EF13B000B54A7 /* MELVisitor_MELVisitorSerialization.m in Sources */,
+				DD7C436C1D2FF7CA008BD2AF /* MELLibrary+MELSerialization.m in Sources */,
 				DDAAA30C1D2BED83000C2C6D /* MELBook.m in Sources */,
 				DD90CB3A1D2ED40C0058693D /* MELLibrary.m in Sources */,
 				DDAAA3021D2BEAEA000C2C6D /* main.m in Sources */,
+				DD7C43731D301E21008BD2AF /* MELVisitor+MELSerialization.m in Sources */,
+				DD7C43631D2FDC71008BD2AF /* NSArray+MELEquality.m in Sources */,
+				DD7C43721D301E21008BD2AF /* MELBook+MELSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

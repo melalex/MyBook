@@ -19,15 +19,16 @@
 @property (readonly) NSString *fullName;
 @property (readonly) NSMutableArray *currentBooks;
  
-@property (readonly, copy) NSString *identifier;
+@property (readonly, assign) NSMutableArray *libraries;
 
 + (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth;
-+ (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth library:(MELLibrary *)library;
 
 - (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth;
-- (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth library:(MELLibrary *)library;
 
 - (BOOL)takeBook:(MELBook *)aBook;
 - (BOOL)returnBook:(MELBook *)aBook;
+
+- (void)addLibrary:(MELLibrary*)library;
+- (void)removeLibrary:(MELLibrary*)library;
 
 @end

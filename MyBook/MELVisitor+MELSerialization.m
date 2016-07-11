@@ -13,27 +13,37 @@
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
+    if(self = [[MELVisitor alloc] initWithName:aDictionary[@"name"] lastName:aDictionary[@"lastName"] yearOfBirth:[@"yearOfBirth" longLongValue]])
+    {
+        @autoreleasepool
+        {
+            MELBook *newBook;
+            
+            for(NSDictionary *book in aDictionary[@"currentBooks"])
+            {
+                newBook = [MELBook CreateBookWithName:book[@"name"] aYear:[book[@"year"] longLongValue] aType:[book[@"type"] longLongValue] aIdentifier:book[@"identifier"]];
+                
+                
+                newBook.owner = self;
+                
+                [self takeBook:newBook];
+            };
+        }
+    }
     return self;
 }
 
 - (NSDictionary *)dictionaryRepresentation;
 {
-    NSMutableDictionary *result = NSMutableDictionary.new;
-    
-    @autoreleasepool
+    NSMutableArray *currentBooks = [NSMutableArray array];
+    for(MELBook *book in self.currentBooks)
     {
-        [result setObject:self.name forKey:@"name"];
-        [result setObject:self.lastName forKey:@"lastName"];
-        [result setObject:[NSNumber numberWithLong:self.yearOfBirth] forKey:@"yearOfBirth"];
-        
-        // TODO
-//        for(MELBook *book in self.currentBooks)
-//        {
-//            [result addEntriesFromDictionary:[book dictionaryRepresentation]];
-//        }
+        NSDictionary *serializedBook = [book dictionaryRepresentation];
+            
+        [currentBooks addObject:serializedBook];
     }
-
-    return result;
+    
+    return @{@"name" : self.name, @"lastName" : self.lastName, @"yearOfBirth" : [NSNumber numberWithLong:self.yearOfBirth], @"currentBooks" : currentBooks};
 }
 
 @end

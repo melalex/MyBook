@@ -30,12 +30,7 @@
 
 + (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth
 {
-    return [MELVisitor createMELVisitorWithName:name lastName:lastName yearOfBirth:yearOfBirth library:nil];
-}
-
-+ (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth library:(MELLibrary *)library
-{
-    return [[MELVisitor alloc] initWithName:name lastName:lastName yearOfBirth:yearOfBirth library:library];
+    return [[MELVisitor alloc]initWithName:name lastName:lastName yearOfBirth:yearOfBirth];
 }
 
 - (instancetype)init
@@ -43,23 +38,18 @@
     if(self = [super init])
     {
         _currentBooks = NSMutableArray.new;
+        _libraries = NSMutableArray.new;
     }
     return self;
 }
 
 - (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth
 {
-    return [self initWithName:name lastName:lastName yearOfBirth:yearOfBirth library:nil];
-}
-
-- (instancetype)initWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth library:(MELLibrary *)library
-{
     if(self = [self init])
     {
         _name = [name copy];
         _lastName = [lastName copy];
         _yearOfBirth = yearOfBirth;
-        [library addVisitor:self];
     }
     return self;
 
@@ -72,6 +62,7 @@
     
     [self.name release];
     [self.lastName release];
+    [self.libraries release];
     
     [super dealloc];
 }
@@ -148,7 +139,7 @@
 
 - (BOOL)takeBook:(MELBook *)aBook
 {
-    if(!aBook.owner)
+    if(!aBook.owner && ([self.libraries containsObject:aBook.library] || aBook == nil))
     {
         [self.currentBooks addObject:aBook];
         aBook.owner = self;
@@ -174,6 +165,18 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"%@ %@", [super description], self.fullName];
+}
+
+//"Library" methods
+
+- (void)addLibrary:(MELLibrary *)library
+{
+    [self.libraries addObject:library];
+}
+
+- (void)removeLibrary:(MELLibrary *)library
+{
+    [self.libraries removeObject:library];
 }
 
 @end

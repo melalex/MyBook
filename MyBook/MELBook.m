@@ -90,10 +90,10 @@
 {
     BOOL result = NO;
     
-    if([_name isEqual:other.getName]
-       && [self.owner isEqual:other.owner]
-       && _year == other.getYear
-       && _type == other.getBookType)
+    if([self.name isEqual:other.name]
+       && self.owner == other.owner
+       && self.year == other.year
+       && self.type == other.type)
     {
         result = YES;
     }
@@ -129,23 +129,27 @@
 
 //Getters
 
-- (NSString *)getName
+- (NSString *)name
 {
     return _name;
 }
 
-- (NSInteger)getYear
+- (NSInteger)year
 {
     return _year;
 }
 
-- (MELBookType)getBookType
+- (MELBookType)type
 {
     return _type;
 } 
 
 - (NSString *)identifier
 {
+    if(!_identifier)
+    {
+        _identifier = [[NSUUID alloc] init].UUIDString;
+    }
     return _identifier;
 }
 
