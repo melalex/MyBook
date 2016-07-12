@@ -145,7 +145,6 @@
         {
             [result addObject:visitor];
         }
-        return result;
     }
     return result;
 }

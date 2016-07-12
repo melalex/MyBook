@@ -78,6 +78,15 @@ int main(int argc, const char * argv[]) {
         
         MELLibrary *library2 = [[MELLibrary alloc] initWithDictionaryRepresentation:serializedBookLibrary1];
         
+        if([library1 isEqual:library1])
+        {
+            NSLog(@"[library1 isEqual:library1]");
+        }
+        else
+        {
+            NSLog(@"![library1 isEqual:library1]");
+        }
+        
         NSLog(@"%lu book(s) found", (unsigned long)[library2 findBook:@"Al"].count);
         
         if([visitor1 returnBook:book1])

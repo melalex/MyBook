@@ -9,7 +9,7 @@
       "name" : "Sanya",
       "currentBooks" : [
         {
-          "identifier" : "5D03FA2B-C175-4B69-8F39-1F7A716558F5",
+          "identifier" : "F85ACC91-B198-4FE0-A822-9857333C5C5D",
           "name" : "1984",
           "year" : 1949,
           "type" : 1
@@ -22,7 +22,7 @@
       "name" : "Vasya",
       "currentBooks" : [
         {
-          "identifier" : "49B65082-CD84-49D3-B40A-BCA67F2BFC18",
+          "identifier" : "365FBD77-4108-48DA-90B7-7CB75EB0E77E",
           "name" : "The Alchemist",
           "year" : 1988,
           "type" : 1
@@ -35,7 +35,7 @@
       "name" : "Ivan",
       "currentBooks" : [
         {
-          "identifier" : "F080789A-47CE-4F3E-8CFE-5F2DDDAE8E27",
+          "identifier" : "6F642394-A113-43A6-9025-0821B7CC59E0",
           "name" : "Dark tower",
           "year" : 1982,
           "type" : 2
