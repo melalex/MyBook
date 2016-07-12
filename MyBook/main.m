@@ -72,11 +72,11 @@ int main(int argc, const char * argv[]) {
         
         [library1 writeToFilePath:@"/Users/melalex/Desktop/Projects/MyBook Exercise 4/library1.json"];
         
-        NSDictionary *serializedBookLibrary1 = [library1 dictionaryRepresentation];
+//        NSDictionary *serializedBookLibrary1 = [library1 dictionaryRepresentation];
         
-//        MELLibrary *library2 = [[MELLibrary alloc] initWithFilePath:@"/Users/melalex/Desktop/Projects/MyBook Exercise 4/library1.json"];
+        MELLibrary *library2 = [[MELLibrary alloc] initWithFilePath:@"/Users/melalex/Desktop/Projects/MyBook Exercise 4/library1.json"];
         
-        MELLibrary *library2 = [[MELLibrary alloc] initWithDictionaryRepresentation:serializedBookLibrary1];
+//        MELLibrary *library2 = [[MELLibrary alloc] initWithDictionaryRepresentation:serializedBookLibrary1];
         
         if([library1 isEqual:library1])
         {
