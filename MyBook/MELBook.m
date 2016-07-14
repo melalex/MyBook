@@ -33,23 +33,23 @@
 
 + (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier
 {
-    return [[MELBook alloc] initWithName:name aYear:year aType:type aIdentifier:identifier];
+    return [[[MELBook alloc] initWithName:name aYear:year aType:type aIdentifier:identifier] autorelease];
 }
 
 + (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aLibrary:(MELLibrary *)library
 {
-    return [[MELBook alloc] initWithName:name aYear:year aType:type aLibrary:library];
+    return [[[MELBook alloc] initWithName:name aYear:year aType:type aLibrary:library] autorelease];
 }
 
 + (instancetype)CreateBookWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier aLibrary:(MELLibrary *)library
 {
-    return [[MELBook alloc] initWithName:name aYear:year aType:type aIdentifier:identifier aLibrary:library];
+    return [[[MELBook alloc] initWithName:name aYear:year aType:type aIdentifier:identifier aLibrary:library] autorelease];
 }
 
 
 - (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type
 {
-    return [self initWithName:name aYear:year aType:type aIdentifier:[[NSUUID alloc] init].UUIDString];
+    return [self initWithName:name aYear:year aType:type aIdentifier:[NSUUID UUID].UUIDString];
 }
 
 - (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier;
@@ -59,7 +59,7 @@
 
 - (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aLibrary:(MELLibrary *)library
 {
-    return [self initWithName:name aYear:year aType:type aIdentifier:[[NSUUID alloc] init].UUIDString aLibrary:library];
+    return [self initWithName:name aYear:year aType:type aIdentifier:[NSUUID UUID].UUIDString aLibrary:library];
 }
 
 - (instancetype)initWithName:(NSString*)name aYear:(NSInteger)year aType:(MELBookType)type aIdentifier:(NSString *)identifier aLibrary:(MELLibrary *)library
@@ -148,14 +148,14 @@
 {
     if(!_identifier)
     {
-        _identifier = [[NSUUID alloc] init].UUIDString;
+        _identifier = [NSUUID UUID].UUIDString;
     }
     return _identifier;
 }
 
 - (NSString *)getBookTypeAsNSString;
 {
-    NSString *type = [[NSString alloc] init];
+    NSString *type = nil;
     switch (_type)
     {
         case kMELBookTypePaperback:

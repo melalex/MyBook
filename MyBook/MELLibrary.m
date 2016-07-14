@@ -125,7 +125,7 @@
 
 - (NSMutableArray *)findBook:(NSString *)name
 {
-    NSMutableArray *result = NSMutableArray.new;
+    NSMutableArray *result = [NSMutableArray.new autorelease];
     for(MELBook *book in self.books)
     {
         if([book.name rangeOfString:name options:(NSCaseInsensitiveSearch)].length != 0)
@@ -138,7 +138,7 @@
 
 - (NSMutableArray *)findVisitor:(NSString *)name
 {
-    NSMutableArray *result = NSMutableArray.new;
+    NSMutableArray *result = [NSMutableArray.new autorelease];
     for(MELVisitor *visitor in self.visitors)
     {
         if([visitor.fullName rangeOfString:name options:(NSCaseInsensitiveSearch)].length != 0)

@@ -43,7 +43,10 @@
         
         if(selfIndex == self.count)
             result = YES;
+        
+        free(visited);
     }
+    
     return result;
 }
 

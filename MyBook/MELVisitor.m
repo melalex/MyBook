@@ -30,7 +30,7 @@
 
 + (instancetype)createMELVisitorWithName:(NSString *)name lastName:(NSString *)lastName yearOfBirth:(NSInteger)yearOfBirth
 {
-    return [[MELVisitor alloc]initWithName:name lastName:lastName yearOfBirth:yearOfBirth];
+    return [[[MELVisitor alloc]initWithName:name lastName:lastName yearOfBirth:yearOfBirth] autorelease];
 }
 
 - (instancetype)init
